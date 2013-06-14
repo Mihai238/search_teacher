@@ -11,14 +11,17 @@
 body {
 	margin:0;
 	font-family:Arial, Helvetica, sans-serif;
-	background:url(../images/bg-body.jpg);
+	background:url(/assets/bg-body.jpg);
 	font-size:12px;
 }
 
-#map-canvas { height: 108%; }
+#map-canvas { height: 100%; }
 
-.leftcls { float: left; padding: 5px 5px 20px 20px; position: auto;}
-.rightcls { float: right; width: 850px; height: 435px; padding: 20px; position:auto;}
+.topcls { padding: 1% 5% 2% 2%;}
+.bottomcls { width: 96%; height: 450px; padding: 1% 2% 1% 2%;}
+
+.leftcls { float: left; padding: 1% 5% 2% 2%; width: 43%;}
+.rightcls { float: right; padding: 1% 5% 2% 5%; width: 43%;}
 
 
 h2 {
@@ -46,7 +49,7 @@ p a:hover {
 }
 /*------------------------- Header ------------------------*/
 #header {
-	background:url(../images/bg-header.jpg);
+	background:url(/assets/bg-header.jpg);
 	height:130px;
 }
 #header div {
@@ -85,7 +88,7 @@ p a:hover {
 	width:110px;
 }
 #header div ul li.selected a {
-	background:url(../images/bg-nav-selected.png) repeat-x;
+	background:url(/assets/bg-nav-selected.png) repeat-x;
 }
 #header div ul li.selected a, #header div ul li a:hover {
 	color:#1bb5ac;
@@ -261,7 +264,7 @@ p a:hover {
 	margin:0 0 0 40px;
 }
 #body.blog {
-	background:url(../images/bg-border.png) repeat-y 660px 0;
+	background:url(/assets/bg-border.png) repeat-y 660px 0;
 	margin-top:38px;
 	overflow:hidden;
 	padding-top:0;
@@ -271,13 +274,13 @@ p a:hover {
 	width:599px;
 }
 #body.blog > div:first-child > ul > li {
-	background:url(../images/bg-mid.png) repeat-y left top;
+	background:url(/assets/bg-mid.png) repeat-y left top;
 	margin:0 0 18px;
 	overflow:hidden;
 	position:relative;
 }
 #body.blog > div:first-child > ul > li span.bg-top {
-	background:url(../images/bg-top.jpg) no-repeat left top;
+	background:url(/assets/bg-top.jpg) no-repeat left top;
 	display:block;
 	height:10px;
 	width:580px;
@@ -322,14 +325,14 @@ p a:hover {
 	letter-spacing:.05em;
 }
 #body.blog > div:first-child > ul > li span.bg-bottom {
-	background:url(../images/bg-bottom.jpg) no-repeat left bottom;
+	background:url(/assets/bg-bottom.jpg) no-repeat left bottom;
 	clear:both;
 	display:block;
 	height:10px;
 	width:580px;
 }
 #body.blog > div:first-child > ul > li span.triangle {
-	background:url(../images/bg-triangle.jpg) no-repeat;
+	background:url(/assets/bg-triangle.jpg) no-repeat;
 	display:block;
 	height:20px;
 	position:absolute;
@@ -370,14 +373,14 @@ p a:hover {
 	margin:0 0 0 15px;
 }
 #body.blog .sidebar {
-	background:url(../images/bg-sidebar-bottom.jpg) no-repeat left bottom;
+	background:url(/assets/bg-sidebar-bottom.jpg) no-repeat left bottom;
 	float:left;
 	margin:0 0 0 83px;
 	padding:0 0 10px;
 	width:220px;
 }
 #body.blog .sidebar h4 {
-	background:url(../images/bg-archive.jpg) no-repeat;
+	background:url(/assets/bg-archive.jpg) no-repeat;
 	color:#627a0e;
 	font-family:anticregular;
 	font-size:20px;
@@ -390,7 +393,7 @@ p a:hover {
 	width:220px;
 }
 #body.blog .sidebar ul {
-	background:url(../images/bg-sidebar-mid.png) repeat-y;
+	background:url(/assets/bg-sidebar-mid.png) repeat-y;
 	list-style:none;
 	margin:0;
 	padding:0 20px;
@@ -403,13 +406,13 @@ p a:hover {
 	border:0;
 }
 #body.blog .sidebar ul li.selected > a {
-	background:url(../images/arrow-up.png) no-repeat right center;
+	background:url(/assets/arrow-up.png) no-repeat right center;
 	color:#e49e06;
 	margin:0 0 13px;
 	padding:15px 0;
 }
 #body.blog .sidebar ul li > a {
-	background:url(../images/arrow-down.png) no-repeat right center;
+	background:url(/assets/arrow-down.png) no-repeat right center;
 	border-bottom:1px solid #e5e5e5;
 	color:#1bb5ac;
 	display:block;
@@ -462,7 +465,7 @@ p a:hover {
 }
 /*------------------------- Footer ------------------------*/
 #footer {
-	background:url(../images/bg-footer.png) repeat-x;
+	background:url(/assets/bg-footer.png) repeat-x;
 	height:50px;
 }
 #footer div {

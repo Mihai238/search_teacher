@@ -15,10 +15,13 @@ body {
 	font-size:12px;
 }
 
-#map-canvas { height: 108%; }
+#map-canvas { height: 100%; }
 
-.leftcls { float: left; padding: 5px 5px 20px 20px; position: auto;}
-.rightcls { float: right; width: 850px; height: 435px; padding: 20px; position:auto;}
+.topcls { padding: 1% 5% 2% 2%;}
+.bottomcls { width: 96%; height: 450px; padding: 1% 2% 1% 2%;}
+
+.leftcls { float: left; padding: 1% 5% 2% 2%; width: 36%;}
+.rightcls { float: right; padding: 1% 5% 2% 6%; width: 36%;}
 
 
 h2 {

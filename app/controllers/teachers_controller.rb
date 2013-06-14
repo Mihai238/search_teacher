@@ -21,7 +21,14 @@ class TeachersController < ApplicationController
 			render "index", :notice => "Error"
 		end
     end
-
+	
+	# def search
+		# adresse = params[:adresse]
+		# fach = params[:fach]
+		# redirect_to students_path, :notice => "perfect"
+	# end
+    # helper_method :search
+	
     def edit
 
     end
