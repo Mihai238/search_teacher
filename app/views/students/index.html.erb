@@ -67,19 +67,34 @@
                     var map = new google.maps.Map(document.getElementById("map-canvas"),
                             mapOptions);
 
-                    <% unless @sortedArrayByDist.nil? %>
-                            <% for teacher in @sortedArrayByDist %>
-                                var image = '/assets/Pin.png';
-                                var myMarker = new google.maps.LatLng(<%=teacher.lat%>, <%=teacher.lng%>);
 
-                                var contentString = '<strong><%=teacher.vorname%> <%=teacher.nachname%></strong>';
-                                var infowindow = new google.maps.InfoWindow({ content: contentString });
+                        /* now inside your initialise function */
+                        var infowindowStudent = new google.maps.InfoWindow({
+                            content: "Student"
+                        });
 
-                                var marker = new google.maps.Marker({ position: myMarker, icon: image, map: map, });
+                        var myMarker = new google.maps.LatLng(<%=@std_lat%>, <%=@std_lng%>);
 
-                                google.maps.event.addListener(marker, 'click', function() { infowindow.open(map,marker); });
-                            <% end %>
-                    <% end %>
+                        var marker = new google.maps.Marker({ position: myMarker, icon: image, map: map, });
+
+                        google.maps.event.addListener(marker, 'click', function () {
+                                infowindowStudent.open(map, this);
+                                });
+
+                        var infoWindows = [];
+                        <% unless @sortedArrayByDist.nil? %>
+                                <% for teacher in @sortedArrayByDist %>
+                                    var image = '/assets/Pin.png';
+                                    var myMarker = new google.maps.LatLng(<%=teacher.lat%>, <%=teacher.lng%>);
+
+                                    contentString = '<strong><%=teacher.vorname%> <%=teacher.nachname%></strong>';
+                                    infoWindows['<%=teacher.id%>'] = new google.maps.InfoWindow({ content: contentString });
+
+                                    var marker = new google.maps.Marker({ position: myMarker, icon: image, map: map, });
+
+                                    google.maps.event.addListener(marker, 'click', function() { infoWindows['<%=teacher.id%>'].open(map, this); });
+                                <% end %>
+                        <% end %>
                 }
 
             google.maps.event.addDomListener(window, 'load', initialize);

@@ -15,6 +15,7 @@ class StudentsController < ApplicationController
 
 	def search_teachers
 		adresseStudent = params[:adresse]
+        compute_coords_student(adresseStudent)
 		fach = params[:fach]
         
         Rails.logger.debug("Caut profi la materia: #{fach}")
@@ -44,6 +45,24 @@ class StudentsController < ApplicationController
 
         @sortedArrayByDist
 	end
+
+    # Compute the coords of the student
+    def compute_coords_student(temp_addr)
+        Rails.logger.debug("Address of the current student: #{temp_addr}")
+        uri = 'http://maps.googleapis.com/maps/api/geocode/xml?address='+ temp_addr +'+&sensor=true'
+        uri = URI.parse(URI.encode(uri.strip))
+        doc = REXML::Document.new(Net::HTTP.get(uri))
+
+        doc.elements.each('GeocodeResponse/result/geometry/location/lat/') do |p|
+            Rails.logger.debug("In Method compute_coords_student: #{p.text.to_f}")
+            @std_lat = p.text.to_f
+        end
+
+        doc.elements.each('GeocodeResponse/result/geometry/location/lng/') do |p|
+            Rails.logger.debug("In Method compute_coords_student: #{p.text.to_f}")
+            @std_lng = p.text.to_f
+        end
+    end
 
     # Compute the distance between 2 addresses
     def compute_distance(adr1, adr2)
