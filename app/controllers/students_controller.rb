@@ -16,6 +16,7 @@ class StudentsController < ApplicationController
 	def search_teachers
 		adresseStudent = params[:adresse]
         compute_coords_student(adresseStudent)
+		@adrstd = adresseStudent
 		fach = params[:fach]
         
         Rails.logger.debug("Caut profi la materia: #{fach}")
@@ -48,6 +49,9 @@ class StudentsController < ApplicationController
 
     # Compute the coords of the student
     def compute_coords_student(temp_addr)
+        require 'net/http'
+        require "rexml/document"
+
         Rails.logger.debug("Address of the current student: #{temp_addr}")
         uri = 'http://maps.googleapis.com/maps/api/geocode/xml?address='+ temp_addr +'+&sensor=true'
         uri = URI.parse(URI.encode(uri.strip))

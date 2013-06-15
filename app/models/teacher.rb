@@ -1,7 +1,7 @@
 class Teacher < ActiveRecord::Base
     include Comparable
 
-    attr_accessible :adresse, :fach, :nachname, :preis, :schultyp, :vorname, :tel
+    attr_accessible :adresse, :fach, :nachname, :preis, :schultyp, :vorname, :tel, :password
 
     validates :adresse, :fach, :nachname, :vorname, :tel, :presence => true
     attr_accessor :dist, :lat, :lng
