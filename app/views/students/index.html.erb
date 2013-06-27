@@ -136,10 +136,11 @@
 						travelMode: google.maps.DirectionsTravelMode.DRIVING
 					};
 					directionsService.route(request, function(response, status) {
-						if (status == google.maps.DirectionsStatus.OK) {
-							directionsDisplay.setDirections(response);
-						}
-					});
+   						 if (status == google.maps.DirectionsStatus.OK) {
+       						 directionsDisplay.setOptions({ preserveViewport: true });
+        						directionsDisplay.setDirections(response);
+   					}
+                    });
 				}
 
 

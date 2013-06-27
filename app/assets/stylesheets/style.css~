@@ -20,9 +20,8 @@ body {
 .topcls { padding: 1% 5% 2% 2%;}
 .bottomcls { width: 96%; height: 450px; padding: 1% 2% 1% 2%;}
 
-.leftcls { float: left; padding: 1% 5% 2% 2%; width: 43%;}
-.rightcls { float: right; padding: 1% 5% 2% 5%; width: 43%;}
-
+.leftcls { float: left; padding: 1% 5% 2% 2%; width: 36%;}
+.rightcls { float: right; padding: 1% 5% 2% 6%; width: 36%;}
 
 h2 {
 	color:#e49e06;

@@ -38,7 +38,7 @@
 				</tr>
 				<tr>
 				<td><%= t.label :password ,"Passwort*:" %></td>
-				<td><%= password_field_tag 'password',nil, :class => 'masked_input_field', :size => 30 %></td>
+				<td><%= t.password_field :password %></td>
 				</tr>
 				<tr>
 				<td><%= t.label :adresse ,"Adresse*:" %></td>
@@ -89,7 +89,7 @@
 					</tr>
 					<tr>
 						<td><%=label_tag 'password1', "Passwort*:" %></td>
-                        <td><%=password_field_tag 'password1',nil, :class => 'masked_input_field', :size => 30%></td>
+                        <td><%=password_field_tag 'password1', '', :size => 30%></td>
 					</tr>
 	            </table>
 				<br /><%= submit_tag 'Löschen' %>

@@ -3,7 +3,7 @@ class Teacher < ActiveRecord::Base
 
     attr_accessible :adresse, :fach, :nachname, :preis, :schultyp, :vorname, :tel, :password
 
-    validates :adresse, :fach, :nachname, :vorname, :tel, :presence => true
+    validates :adresse, :fach, :nachname, :vorname, :password, :tel, :presence => true
     attr_accessor :dist, :lat, :lng
 
     def <=> (other)

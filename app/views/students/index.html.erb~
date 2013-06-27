@@ -1,95 +1,162 @@
 <!DOCTYPE html>
 <!-- Website template by freewebsitetemplates.com -->
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>GIS Anwendung</title>
-	<link rel="shortcut icon" href="/assets/logo.png"/>
-	<%= stylesheet_link_tag "style" %>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzdGn7JKNFcO43RYMYRGfiXr91_b2ayuw&sensor=false"></script>
-</head>
-<body>
-	<div id="header">
-		<div>
-			<a href="index.html" id="logo"><img src="/assets/logo.png" alt="logo"></a>
-			<ul>
-				<li>
-					<a href="index.html">Home</a>
-				</li>
-				<li class="selected">
-					<a href="/students">Schüler</a>
-				</li>
-				<li>
-					<a href="/teachers">Lehrer</a>
-				</li>
-				
-			</ul>
+    <head>
+        <meta charset="UTF-8">
+        <title>GIS Anwendung</title>
+        <link rel="shortcut icon" href="/assets/logo.png"/>
+        <%= stylesheet_link_tag "style" %>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzdGn7JKNFcO43RYMYRGfiXr91_b2ayuw&sensor=false"></script>
+    </head>
+    <body>
+        <div id="header">
+            <div>
+                <a href="index.html" id="logo"><img src="/assets/logo.png" alt="logo"></a>
+                <ul>
+                    <li>
+                    <a href="index.html">Home</a>
+                    </li>
+                    <li class="selected">
+                    <a href="/students">Schüler</a>
+                    </li>
+                    <li>
+                    <a href="/teachers">Lehrer</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="topcls">
+            <h2>Daten</h2>
+            <%= form_tag @student do |s| %>
+                <table border="0" cellpadding="0" cellspacing="10">
+                    <tr>
+                        <td><%=label_tag 'adresse', "Adresse*:" %></td>
+                        <td id="start"><%=text_field_tag 'adresse', '', :size => 30 %></td>
+                        <td><%=label_tag 'fach', "Fach*:" %></td>
+                        <td><%=text_field_tag 'fach', '', :size => 30 %></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="color:#959595; font-style:italic;">(z.B. 1070 Wien Neubaugasse 40)</td>
+						<td colspan="2" style="color:#959595; font-style:italic; text-align:left;">(z.B. Mathematik)</td>
+					</tr>
+					<tr>
+						<td> </td>
+					</tr>
+					<tr>
+						<td><%= submit_tag 'Suchen' %></td>
+						<td><% if @sortedArrayByDist.nil? == false && @sortedArrayByDist.length == 0 %> 
+								<strong>Kein passender Lehrer gefunden!</strong>
+							<% elsif @sortedArrayByDist.nil? == false %>
+								<strong><%= @sortedArrayByDist.length %> Lehrer gefunden!</strong>
+							<% end %></td>
+					</tr>
+                </table>
+			 <% end %>
 		</div>
-	</div>
-	<div class="topcls">
-		<h2>Daten</h2>
-			<form action="input_text_tabelle.htm">
-			  <table border="0" cellpadding="0" cellspacing="10">
-				<tr>
-				  <td align="right">Adresse*:</td>
-				  <td><input name="Adresse" type="text" size="30" maxlength="40"></td>
-				  <td align="right">Fach*:</td>
-				  <td><input name="Fächer" type="text" size="30" maxlength="40"></td>
-				</tr>			
-				<tr>
-				  <td align="right">Schultyp:</td>
-				  <td><input name="Schultyp" type="text" size="30" maxlength="40"></td>
-				  <td align="right">Preis:</td>
-				  <td><input name="Kosten pro Stunde" type="text" size="30" maxlength="40"></td>
-				</tr>
-				</table>
-			</form>
-				<br />
-				<input type="submit" class="Button" value="Suchen">
+
+		<!-- <div class="result">
+            <% unless @sortedArrayByDist.nil? %>
+                <% for teacher in @sortedArrayByDist %>
+                    <%= teacher.vorname %>
+                    <%= teacher.nachname %>
+                    <%= teacher.adresse %>
+                    <%= teacher.preis %>
+                    <%= teacher.tel %>
+                    Fahrzeit in min:
+                    <%= teacher.dist/60 %> <br />
+                <% end %>
+            <% end %>
+        </div> -->
+
+        <div class='bottomcls'>
+
+            <div id="map-canvas"></div>
+            <script type="text/javascript">
+				var directionsDisplay;
+				var directionsService = new google.maps.DirectionsService();
+
+
+                function initialize() {
+					directionsDisplay = new google.maps.DirectionsRenderer({
+						suppressMarkers: true
+					});
+
+
+					var mapOptions = { center: new google.maps.LatLng(48.207973,16.337857), zoom: 14, mapTypeId: google.maps.MapTypeId.ROADMAP };
 					
-		</div>
-		<div class='bottomcls'>
-			
-			<div id="map-canvas"></div>
-			<script type="text/javascript">
-			  function initialize() {
-				var mapOptions = {
-				  center: new google.maps.LatLng(48.21598,16.312094),
-				  zoom: 13,
-				  mapTypeId: google.maps.MapTypeId.ROADMAP
-				};
-				var map = new google.maps.Map(document.getElementById("map-canvas"),
-					mapOptions);
-					
-				var image = '/assets/Pin.png';
-				var myMarker = new google.maps.LatLng(48.21598,16.312094);
-				var contentString = '<strong>1160 Wien</strong>';
-				var infowindow = new google.maps.InfoWindow({
-					content: contentString
-				});
+					var map = new google.maps.Map(document.getElementById("map-canvas"),
+                            mapOptions);
+							
+					directionsDisplay.setMap(map);
+
 				
-				var marker = new google.maps.Marker({
-					position: myMarker,
-					icon: image,
-					map: map,
-				});
-				google.maps.event.addListener(marker, 'click', function() {
-				  infowindow.open(map,marker);
-				});
-			  }
-			  google.maps.event.addDomListener(window, 'load', initialize);
-			</script>
-		</div>
-			
-	<div class="cleaner"></div>
-	
-	<div id="footer">
-		<div>
-			<p>
-				&#169; Denk &amp; Plocon 2013
-			</p>
-			
-		</div>
-	</div>
-</body>
+
+                        /* now inside the initialise function */
+                        /* var infowindowStudent = new google.maps.InfoWindow({
+                            content: "Student"
+                        }); */
+						var pic = '/assets/home.png';
+
+                        <% unless @std_lat.nil? and @std_lng.nil? %>
+                            var myMarker = new google.maps.LatLng(<%=@std_lat%>, <%=@std_lng%>);
+                            var marker = new google.maps.Marker({ position: myMarker, icon: pic, map: map, });
+
+                            google.maps.event.addListener(marker, 'click', function () {
+                                    infowindowStudent.open(map, this);
+                                    });
+                        <% end %>
+						
+						
+
+                        var infoWindows = [];
+                        <% unless @sortedArrayByDist.nil? %>
+                                <% for teacher in @sortedArrayByDist %>
+                                    var image = '/assets/Pin.png';
+                                    var myMarker = new google.maps.LatLng(<%=teacher.lat%>, <%=teacher.lng%>);
+
+                                    contentString = '<strong><%=teacher.vorname%> <%=teacher.nachname%></strong><br /><br /><strong>Adresse: </strong><%=teacher.adresse%><br /><strong>Schultyp: </strong><%=teacher.schultyp%><br /><strong>Preis/h: </strong><%=teacher.preis%><br /><strong>Tel: </strong><%=teacher.tel%>';
+                                    
+									infoWindows['<%=teacher.id%>'] = new google.maps.InfoWindow({ content: contentString });
+
+                                    var marker = new google.maps.Marker({ position: myMarker, icon: image, map: map, });
+
+                                    google.maps.event.addListener(marker, 'click', function() { infoWindows['<%=teacher.id%>'].open(map, this); calcRoute("<%=teacher.adresse%>"); });
+                                <% end %>
+                        <% end %>
+						
+					
+                }
+				
+				function calcRoute(end) {
+					var start = "<%=@adrstd%>";
+					var request = {
+						origin:start,
+						destination:end,
+						travelMode: google.maps.DirectionsTravelMode.DRIVING
+					};
+					directionsService.route(request, function(response, status) {
+   						 if (status == google.maps.DirectionsStatus.OK) {
+       						 directionsDisplay.setOptions({ preserveViewport: true });
+        						directionsDisplay.setDirections(response);
+   					}
+}
+				}
+
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+        </div>
+
+        <div class="cleaner"></div>
+
+        <div id="footer">
+            <div>
+                <p>
+                &#169; Denk &amp; Plocon 2013
+                </p>
+
+            </div>
+        </div>
+    </body>
 </html>

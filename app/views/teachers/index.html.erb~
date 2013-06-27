@@ -29,60 +29,77 @@
 		<%= form_for @teacher do |t| %>
 			<table border="0" cellpadding="0" cellspacing="10">
 				<tr>
-				<td><%= t.label :vorname ,"Vorname*" %></td>
+				<td><%= t.label :vorname ,"Vorname*:" %></td>
 				<td><%= t.text_field :vorname %></td>
 				</tr>
 				<tr>
-				<td><%= t.label :nachname ,"Nachname*" %></td>
+				<td><%= t.label :nachname ,"Nachname*:" %></td>
 				<td><%= t.text_field :nachname %></td>
 				</tr>
 				<tr>
-				<td><%= t.label :adresse ,"Adresse*" %></td>
+				<td><%= t.label :password ,"Passwort*:" %></td>
+				<td><%= t.text_field :password %></td>
+				</tr>
+				<tr>
+				<td><%= t.label :adresse ,"Adresse*:" %></td>
 				<td><%= t.text_field :adresse %></td>
 				</tr>
 				<tr>
-				<td><%= t.label :fach ,"Fach*" %></td>
+				<td><%= t.label :fach ,"Fach*:" %></td>
 				<td><%= t.text_field :fach %></td>
 				</tr>
 				<tr>
-				<td><%= t.label :tel ,"Tel.Nr.*" %></td>
+				<td><%= t.label :tel ,"Tel.Nr.*:" %></td>
 				<td><%= t.text_field :tel %></td>
 				</tr>
 				<tr>
-				<td><%= t.label :schultyp %></td>
+				<td><%= t.label :schultyp ,"Schultyp:" %></td>
 				<td><%= t.text_field :schultyp %></td>
 				</tr>
 				<tr>
-				<td><%= t.label :preis %></td>
+				<td><%= t.label :preis ,"Preis/h:" %></td>
 				<td><%= t.text_field :preis %></td>
 				</tr>
 			</table>
 			<table border="0" cellpadding="0" cellspacing="4">
 				<tr>
 				<td><%= t.submit "Speichern" %></td>
-				<td>
+				<!-- <td>
 					<% flash.each do |key, value| %>
 						<p><%= value %></p>
 					<% end %>
-				</td>
-				<td>
-					<% if @teacher.errors.any? %>
-						<p>Bitte füllen Sie alle *Felder aus!</p>
-					<% end %>
-				</td>
+				</td> -->
+				
 				</tr>
 			</table>
 		<% end %>
 		</div>
 		<div class='rightcls'>
 			
-			<h2>Profil ändern / löschen</h2>
-			<p style="color:red">TODO!!!</p>
+			<h2>Profil löschen</h2>
+			<%= form_tag @tea do |ts| %>
+                <table border="0" cellpadding="0" cellspacing="10">
+                    <tr>
+                        <td><%=label_tag 'vorname1', "Vorname*:" %></td>
+                        <td><%=text_field_tag 'vorname1', '', :size => 30%></td>
+					</tr>
+					<tr>
+                        <td><%=label_tag 'nachname1', "Nachname*:" %></td>
+                        <td><%=text_field_tag 'nachname1', '', :size => 30%></td>
+					</tr>
+					<tr>
+						<td><%=label_tag 'password1', "Passwort*:" %></td>
+                        <td><%= text_field_tag :password1 %></td>
+					</tr>
+	            </table>
+				<br /><%= submit_tag 'Löschen' %>
+               
+            <% end %>
 			
 		</div>
 			
 	
-	
+	<div class="cleaner"></div>
 
 	<div id="footer">
 		<div>
